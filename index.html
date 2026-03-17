@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>FondosApp — Aniversario Iglesia Ríos de Agua Viva 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<title>FondosApp — Aniversario Iglesia Ríos de Agua Viva 2026</title>
+
 <style>
 /* ══════════════════════════════════════════════
    VARIABLES — BLANCO & AZUL
 ══════════════════════════════════════════════ */
 :root {
-  --bg:      #f0f4fa;
-  --bg2:     #e8eef8;
-  --bg3:     #dce5f5;
+  --bg:      #f8f9fa;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
   --card:    #ffffff;
   --card2:   #f7f9fe;
-  --border:  #dce6f5;
-  --border2: #bdd0ee;
+  --border:  #e0e0e0;
+  --border2: #cccccc;
   --blue1:   #1a3fa0;
   --blue2:   #2154c8;
   --blue3:   #3b72e8;
@@ -33,7 +34,7 @@
   --text2:   #4a6091;
   --text3:   #7f96bb;
   --ff-head: 'Syne', sans-serif;
-  --ff-body: 'Outfit', sans-serif;
+  --ff-body: 'Poppins', sans-serif;
   --rad:     14px;
   --rad-sm:  9px;
   --sidebar: 256px;
@@ -211,7 +212,7 @@ body {
 body.read-only .admin-only { display:none !important; }
 
 /* ══════ KPI CARDS ══════ */
-.kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:22px; }
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom:22px; }
 .kpi-card {
   background:#fff; border:1px solid var(--border); border-radius:var(--rad); padding:20px;
   display:flex; align-items:center; gap:14px; transition:all var(--trans);
@@ -281,7 +282,7 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
 .fg label { font-size:11px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.5px; }
 .fg input,.fg select,.fg textarea {
   padding:10px 14px; background:#fff; border:1.5px solid var(--border2); border-radius:var(--rad-sm);
-  color:var(--text); font-family:var(--ff-body); font-size:14px; outline:none; transition:border-color var(--trans); -webkit-appearance:none;
+  color:var(--text); font-family:var(--ff-body); font-size:14px; outline:none; transition:border-color var(--trans); -webkit-appearance:none; appearance:none;
 }
 .fg input:focus,.fg select:focus,.fg textarea:focus { border-color:var(--blue2); box-shadow:0 0 0 3px rgba(33,84,200,.10); }
 .fg select option { background:#fff; color:var(--text); }
@@ -359,18 +360,26 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
 @keyframes fbpulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
 /* ══════ RESPONSIVE ══════ */
-@media (max-width:1100px) { .kpi-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:1100px) {  }
 @media (max-width:900px)  { .two-col,.three-col,.caja-boxes { grid-template-columns:1fr; } }
 @media (max-width:768px) {
   .sidebar { transform:translateX(-100%); }
   .sidebar.open { transform:none; box-shadow:6px 0 40px rgba(26,63,160,.30); }
   .main { margin-left:0; }
   .menu-toggle { display:block; }
-  .kpi-grid { grid-template-columns:1fr 1fr; }
   .page { padding:16px; }
   .topbar { padding:12px 16px; }
+  body { font-size:12px; }
+  .topbar-title h1 { font-size:18px; }
+  .kpi-val { font-size:20px; }
+  .cb-val { font-size:24px; }
 }
-@media (max-width:480px) { .kpi-grid { grid-template-columns:1fr; } }
+@media (max-width:480px) { 
+  body { font-size:11px; }
+  .kpi-val { font-size:18px; }
+  .cb-val { font-size:20px; }
+  .topbar-title h1 { font-size:16px; }
+}
 @media print {
   .sidebar,.topbar,.btn-primary,.btn-sm,.filter-row,.admin-only { display:none!important; }
   .main { margin-left:0!important; }
@@ -435,7 +444,7 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
     <div class="sb-section">Gestión</div>
     <button class="nav-btn" onclick="nav('miembros')"><i class="fas fa-users"></i><span>Miembros</span></button>
     <button class="nav-btn" onclick="nav('promesas')"><i class="fas fa-handshake"></i><span>Promesas</span></button>
-    <button class="nav-btn" onclick="nav('pagos')"><i class="fas fa-circle-dollar-to-slot"></i><span>Pagos / Adelantos</span></button>
+    <button class="nav-btn" onclick="nav('pagos')"><i class="fas fa-circle-dollar-to-slot"></i><span>Pagos / Insumos</span></button>
     <button class="nav-btn" onclick="nav('gastos')"><i class="fas fa-receipt"></i><span>Gastos</span></button>
     <div class="sb-section">Finanzas</div>
     <button class="nav-btn" onclick="nav('caja')"><i class="fas fa-scale-balanced"></i><span>Cuadre de Caja</span></button>
@@ -472,6 +481,7 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
     <div class="kpi-card kpi-emerald"><div class="kpi-icon"><i class="fas fa-circle-check"></i></div>      <div><span class="kpi-label">Total Recaudado</span><span class="kpi-val" id="kd-rec">$0.00</span></div></div>
     <div class="kpi-card kpi-rose">   <div class="kpi-icon"><i class="fas fa-arrow-trend-down"></i></div> <div><span class="kpi-label">Total Gastos</span><span class="kpi-val" id="kd-gas">$0.00</span></div></div>
     <div class="kpi-card kpi-amber">  <div class="kpi-icon"><i class="fas fa-wallet"></i></div>           <div><span class="kpi-label">Saldo en Caja</span><span class="kpi-val" id="kd-sal">$0.00</span></div></div>
+    <div class="kpi-card kpi-violet"> <div class="kpi-icon"><i class="fas fa-box"></i></div>              <div><span class="kpi-label">Insumos Prometidos</span><span class="kpi-val" id="kd-ins">0</span></div></div>
   </div>
   <div class="card">
     <div class="card-hdr"><h2><i class="fas fa-chart-line"></i> Progreso de Recaudación</h2><span class="pct-pill" id="kd-pct">0%</span></div>
@@ -531,7 +541,9 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
     <div class="card-body">
       <div class="form-grid">
         <div class="fg"><label>Miembro *</label><select id="pm-m"><option value="">— Seleccionar —</option></select></div>
-        <div class="fg"><label>Monto Prometido ($) *</label><input id="pm-mo" type="number" placeholder="0.00" min="0" step="0.01"/></div>
+        <div class="fg"><label>Tipo de Promesa *</label><select id="pm-tipo" onchange="toggleTipoPromesa()"><option value="dinero">Dinero</option><option value="especie">Donación en Especie</option></select></div>
+        <div class="fg" id="fg-monto"><label>Monto Prometido ($) *</label><input id="pm-mo" type="number" placeholder="0.00" min="0" step="0.01"/></div>
+        <div class="fg" id="fg-especie" style="display:none;"><label>Descripción de Donación *</label><textarea id="pm-desc" placeholder="Ej: Insumos de cocina, materiales de construcción, etc."></textarea></div>
         <div class="fg"><label>Fecha</label><input id="pm-f" type="date"/></div>
         <div class="fg"><label>Observación</label><input id="pm-obs" type="text" placeholder="Nota opcional..."/></div>
       </div>
@@ -550,7 +562,7 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
     </div>
     <div class="tbl-wrap">
       <table class="t">
-        <thead><tr><th>Miembro</th><th>Prometido</th><th>Pagado</th><th>Pendiente</th><th>Fecha</th><th>Estado</th><th>Obs.</th><th class="admin-only">Acc.</th></tr></thead>
+        <thead><tr><th>Miembro</th><th>Prometido/Detalle</th><th>Pagado</th><th>Pendiente</th><th>Fecha</th><th>Estado</th><th>Obs.</th><th class="admin-only">Acc.</th></tr></thead>
         <tbody id="tb-promesas"></tbody>
       </table>
     </div>
@@ -560,14 +572,16 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
 <!-- PAGOS -->
 <div class="page" id="pg-pagos">
   <div class="card admin-only" style="margin-bottom:20px">
-    <div class="card-hdr"><h2><i class="fas fa-plus-circle"></i> Registrar Pago / Adelanto</h2></div>
+    <div class="card-hdr"><h2><i class="fas fa-plus-circle"></i> Registrar Pago / Entrega de Insumos</h2></div>
     <div class="card-body">
       <div class="form-grid">
+        <div class="fg"><label>Tipo de Registro *</label><select id="pg-tipo-reg" onchange="toggleTipoRegistro()"><option value="pago">Pago</option><option value="insumo">Entrega de Insumos</option></select></div>
         <div class="fg"><label>Miembro *</label><select id="pg-m" onchange="loadPgPromesas()"><option value="">— Seleccionar —</option></select></div>
         <div class="fg"><label>Promesa vinculada</label><select id="pg-pr"><option value="">— Sin promesa —</option></select></div>
-        <div class="fg"><label>Monto ($) *</label><input id="pg-mo" type="number" placeholder="0.00" min="0" step="0.01"/></div>
-        <div class="fg"><label>Tipo</label><select id="pg-ti"><option>Pago</option><option>Adelanto</option><option>Ofrenda</option><option>Donación Especial</option></select></div>
-        <div class="fg"><label>Forma de Pago</label><select id="pg-fo"><option>Efectivo</option><option>Transferencia</option><option>Cheque</option><option>Otro</option></select></div>
+        <div class="fg" id="fg-monto-pago"><label>Monto ($) *</label><input id="pg-mo" type="number" placeholder="0.00" min="0" step="0.01"/></div>
+        <div class="fg" id="fg-tipo"><label>Tipo</label><select id="pg-ti"><option>Pago</option><option>Adelanto</option><option>Ofrenda</option><option>Donación Especial</option></select></div>
+        <div class="fg" id="fg-forma"><label>Forma de Pago</label><select id="pg-fo"><option>Efectivo</option><option>Transferencia</option><option>Cheque</option><option>Otro</option></select></div>
+        <div class="fg" id="fg-desc-insumo" style="display:none;"><label>Descripción de Insumos *</label><textarea id="pg-desc" placeholder="Ej: 10 kg de arroz, 5 botellas de aceite..."></textarea></div>
         <div class="fg"><label>Fecha</label><input id="pg-fe" type="date"/></div>
         <div class="fg form-full"><label>Observación</label><input id="pg-ob" type="text" placeholder="Nota opcional..."/></div>
       </div>
@@ -659,7 +673,7 @@ table.t tfoot td { padding:12px 16px; background:var(--bg2); font-weight:700; bo
     <div class="card-hdr"><h2><i class="fas fa-chart-pie"></i> Aportes por Miembro</h2><button class="btn-sm btn-link" onclick="window.print()"><i class="fas fa-print"></i> Imprimir</button></div>
     <div class="tbl-wrap">
       <table class="t">
-        <thead><tr><th>#</th><th>Miembro</th><th>Prometido</th><th>Pagado</th><th>Pendiente</th><th>% Cumplido</th><th>Estado</th></tr></thead>
+        <thead><tr><th>#</th><th>Miembro</th><th>Prometido</th><th>Pagado</th><th>Pendiente</th><th>Insumos Entregados</th><th></th>% Cumplido</th><th>Estado</th></tr></thead>
         <tbody id="tb-reporte"></tbody>
         <tfoot id="tf-reporte"></tfoot>
       </table>
@@ -751,9 +765,9 @@ const sumArr = (arr,key) => arr.reduce((s,x)=>s+(parseFloat(x[key])||0),0);
 let boletaCount = parseInt(localStorage.getItem('_bc')||'0');
 const bNum = pfx => { boletaCount++; localStorage.setItem('_bc',boletaCount); return pfx+'-'+String(boletaCount).padStart(4,'0'); };
 
-function statusBadge(s) {
-  const map={Pendiente:'b-pending',Parcial:'b-partial',Completo:'b-complete'};
-  return `<span class="badge ${map[s]||'b-pending'}">${s||'Pendiente'}</span>`;
+function iconForCat(c) {
+  const map = {Decoración:'fa-palette',Alimentación:'fa-utensils',Logística:'fa-truck',Imprenta:'fa-print','Audio y Video':'fa-volume-up',Transporte:'fa-car',Vestuario:'fa-tshirt',Servicios:'fa-tools',Otros:'fa-question'};
+  return map[c] || 'fa-tag';
 }
 
 /* ══════ TOAST ══════ */
@@ -840,7 +854,7 @@ function refreshCurrentPage() {
 }
 
 /* ══════ NAVIGATION ══════ */
-const PAGES={dashboard:'Dashboard',miembros:'Miembros',promesas:'Promesas de Donación',pagos:'Pagos / Adelantos',gastos:'Gastos con Boleta',caja:'Cuadre de Caja',reporte:'Reporte por Miembro'};
+const PAGES={dashboard:'Dashboard',miembros:'Miembros',promesas:'Promesas de Donación',pagos:'Pagos / Insumos',gastos:'Gastos con Boleta',caja:'Cuadre de Caja',reporte:'Reporte por Miembro'};
 window.nav = id => {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -848,7 +862,7 @@ window.nav = id => {
   document.querySelectorAll('.nav-btn').forEach(b=>{ if(b.getAttribute('onclick')===`nav('${id}')`) b.classList.add('active'); });
   document.getElementById('page-title').textContent=PAGES[id]||id;
   if(window.innerWidth<=768) document.getElementById('sidebar').classList.remove('open');
-  const map={dashboard:renderDashboard,miembros:renderMiembros,promesas:()=>{loadMiembrosSel('pm-m');renderPromesas();},pagos:()=>{loadMiembrosSel('pg-m');renderPagos();},gastos:renderGastos,caja:renderCaja,reporte:renderReporte};
+  const map={dashboard:renderDashboard,miembros:renderMiembros,promesas:()=>{loadMiembrosSel('pm-m');renderPromesas();toggleTipoPromesa();},pagos:()=>{loadMiembrosSel('pg-m');renderPagos();toggleTipoRegistro();},gastos:renderGastos,caja:renderCaja,reporte:renderReporte};
   if(map[id]) map[id]();
 };
 window.toggleSidebar=()=>document.getElementById('sidebar').classList.toggle('open');
@@ -872,22 +886,28 @@ async function recalcPromesa(pid) {
 
 /* ══════ DASHBOARD ══════ */
 function renderDashboard() {
-  const prom=sumArr(STATE.promesas,'monto'), rec=sumArr(STATE.pagos,'monto'), gas=sumArr(STATE.gastos,'monto'), sal=rec-gas;
+  const prom=sumArr(STATE.promesas.filter(p=>p.tipo!=='especie'),'monto'), rec=sumArr(STATE.pagos,'monto'), gas=sumArr(STATE.gastos,'monto'), sal=rec-gas;
+  const insumosCount = STATE.promesas.filter(p=>p.tipo==='especie').length;
   const pct=prom>0?Math.min(100,(rec/prom)*100):0;
   document.getElementById('kd-prom').textContent=fmt(prom);
   document.getElementById('kd-rec').textContent=fmt(rec);
   document.getElementById('kd-gas').textContent=fmt(gas);
   document.getElementById('kd-sal').textContent=fmt(sal);
+  document.getElementById('kd-ins').textContent=insumosCount;
   document.getElementById('kd-pct').textContent=pct.toFixed(1)+'%';
   document.getElementById('kd-bar').style.width=pct+'%';
   document.getElementById('kd-pr2').textContent=fmt(rec);
   document.getElementById('kd-pm2').textContent=fmt(prom);
 
   const prs=[...STATE.promesas].reverse().slice(0,5);
-  document.getElementById('dtb-prom').innerHTML=prs.length?prs.map(p=>`<tr>
+  document.getElementById('dtb-prom').innerHTML=prs.length?prs.map(p=>{
+    const tipo = p.tipo || 'dinero';
+    const detalle = tipo === 'especie' ? (p.descripcion.length > 30 ? p.descripcion.substring(0,30)+'...' : p.descripcion) : fmt(p.monto);
+    return `<tr>
     <td class="td-name">${getMnombre(p.miembroId)}</td>
-    <td style="font-weight:700;color:var(--blue2)">${fmt(p.monto)}</td>
-    <td>${statusBadge(p.estado)}</td></tr>`).join(''):`<tr><td colspan="3"><div class="empty"><i class="fas fa-handshake"></i><p>Sin promesas</p></div></td></tr>`;
+    <td style="font-weight:700;color:var(--blue2)">${detalle}</td>
+    <td>${statusBadge(p.estado)}</td></tr>`;
+  }).join(''):`<tr><td colspan="3"><div class="empty"><i class="fas fa-handshake"></i><p>Sin promesas</p></div></td></tr>`;
 
   const gts=[...STATE.gastos].reverse().slice(0,5);
   document.getElementById('dtb-gas').innerHTML=gts.length?gts.map(g=>`<tr>
@@ -942,38 +962,101 @@ function renderMiembros() {
 window.delMiembro=async id=>{if(!isAdmin||!confirm('¿Eliminar miembro?'))return;await deleteDoc(doc(db,'miembros',id));toast('Miembro eliminado','info');};
 
 /* ══════ PROMESAS ══════ */
+window.toggleTipoPromesa = () => {
+  const tipo = document.getElementById('pm-tipo').value;
+  const fgMonto = document.getElementById('fg-monto');
+  const fgEspecie = document.getElementById('fg-especie');
+  const inputMonto = document.getElementById('pm-mo');
+  const inputDesc = document.getElementById('pm-desc');
+  
+  if (tipo === 'especie') {
+    fgMonto.style.display = 'none';
+    fgEspecie.style.display = 'block';
+    inputMonto.required = false;
+    inputDesc.required = true;
+  } else {
+    fgMonto.style.display = 'block';
+    fgEspecie.style.display = 'none';
+    inputMonto.required = true;
+    inputDesc.required = false;
+  }
+};
+
+window.toggleTipoRegistro = () => {
+  const tipo = document.getElementById('pg-tipo-reg').value;
+  const fgMonto = document.getElementById('fg-monto-pago');
+  const fgForma = document.getElementById('fg-forma');
+  const fgTipo = document.getElementById('fg-tipo');
+  const fgDesc = document.getElementById('fg-desc-insumo');
+  
+  if (tipo === 'insumo') {
+    fgMonto.style.display = 'none';
+    fgForma.style.display = 'none';
+    fgTipo.style.display = 'none';
+    fgDesc.style.display = 'block';
+  } else {
+    fgMonto.style.display = 'block';
+    fgForma.style.display = 'block';
+    fgTipo.style.display = 'block';
+    fgDesc.style.display = 'none';
+  }
+  loadPgPromesas();
+};
+
 window.savePromesa = async () => {
   if(!isAdmin){toast('Debes iniciar sesión como administrador','err');return;}
   const mid=document.getElementById('pm-m').value;
-  const mo=parseFloat(document.getElementById('pm-mo').value);
+  const tipo=document.getElementById('pm-tipo').value;
+  const mo=tipo==='dinero'?parseFloat(document.getElementById('pm-mo').value):0;
+  const desc=tipo==='especie'?document.getElementById('pm-desc').value.trim():'';
+  
   if(!mid){toast('Selecciona un miembro','err');return;}
-  if(!mo||mo<=0){toast('Ingresa un monto válido','err');return;}
-  await addDoc(collection(db,'promesas'),{miembroId:mid,monto:mo,fecha:document.getElementById('pm-f').value,obs:document.getElementById('pm-obs').value,estado:'Pendiente',pagado:0,creadoEn:new Date().toISOString()});
-  document.getElementById('pm-mo').value=''; document.getElementById('pm-obs').value='';
+  if(tipo==='dinero'&&(!mo||mo<=0)){toast('Ingresa un monto válido','err');return;}
+  if(tipo==='especie'&&!desc){toast('Ingresa una descripción de la donación','err');return;}
+  
+  await addDoc(collection(db,'promesas'),{
+    miembroId:mid,
+    tipo:tipo,
+    monto:mo,
+    descripcion:desc,
+    fecha:document.getElementById('pm-f').value,
+    obs:document.getElementById('pm-obs').value,
+    estado:'Pendiente',
+    pagado:0,
+    creadoEn:new Date().toISOString()
+  });
+  
+  document.getElementById('pm-mo').value=''; 
+  document.getElementById('pm-desc').value=''; 
+  document.getElementById('pm-obs').value='';
+  document.getElementById('pm-tipo').value='dinero';
+  toggleTipoPromesa();
   toast('✓ Promesa registrada','ok');
 };
 
 function renderPromesas() {
   const fil=document.getElementById('pm-filtro').value;
   const all=STATE.promesas;
-  document.getElementById('kp-tot').textContent=fmt(sumArr(all,'monto'));
+  document.getElementById('kp-tot').textContent=fmt(sumArr(all.filter(p=>p.tipo!=='especie'),'monto'));
   document.getElementById('kp-com').textContent=all.filter(p=>p.estado==='Completo').length;
   document.getElementById('kp-pen').textContent=all.filter(p=>p.estado!=='Completo').length;
   const list=fil?all.filter(p=>p.estado===fil):all;
   const tbody=document.getElementById('tb-promesas');
   if(!list.length){tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="fas fa-handshake"></i><p>Sin promesas</p></div></td></tr>`;return;}
   tbody.innerHTML=[...list].reverse().map(p=>{
-    const pagado=parseFloat(p.pagado||0),pend=Math.max(0,parseFloat(p.monto)-pagado);
+    const tipo = p.tipo || 'dinero';
+    const prometido = tipo === 'especie' ? p.descripcion : fmt(p.monto);
+    const pagado=parseFloat(p.pagado||0),pend=tipo==='especie'? (p.estado==='Completo'?'Completado':'Pendiente') : fmt(Math.max(0,parseFloat(p.monto)-pagado));
     return `<tr>
       <td class="td-name">${getMnombre(p.miembroId)}</td>
-      <td style="font-weight:700;color:var(--blue2)">${fmt(p.monto)}</td>
-      <td style="color:var(--green);font-weight:600">${fmt(pagado)}</td>
-      <td style="color:${pend>0?'var(--red)':'var(--green)'};font-weight:600">${fmt(pend)}</td>
+      <td style="font-weight:700;color:var(--blue2)">${prometido}</td>
+      <td style="color:var(--green);font-weight:600">${tipo==='especie'?'—':fmt(pagado)}</td>
+      <td style="color:${tipo==='especie'?(p.estado==='Completo'?'var(--green)':'var(--red)'):(pend>0?'var(--red)':'var(--green)')};font-weight:600">${pend}</td>
       <td style="color:var(--text3)">${p.fecha||'—'}</td>
       <td>${statusBadge(p.estado)}</td>
       <td style="color:var(--text3)">${p.obs||'—'}</td>
       <td class="admin-only" style="display:flex;gap:6px">
-        <button class="btn-sm btn-edit" onclick="irAPagoPromesa('${p.id}','${p.miembroId}')"><i class="fas fa-plus"></i> Pago</button>
+        ${tipo==='dinero'?'<button class="btn-sm btn-edit" onclick="irAPagoPromesa(\''+p.id+'\',\''+p.miembroId+'\')"><i class="fas fa-plus"></i> Pago</button>':''}
         <button class="btn-sm btn-del"  onclick="delPromesa('${p.id}')"><i class="fas fa-trash"></i></button>
       </td>
     </tr>`;
@@ -985,39 +1068,53 @@ window.delPromesa=async id=>{if(!isAdmin||!confirm('¿Eliminar promesa?'))return
 /* ══════ PAGOS ══════ */
 window.loadPgPromesas=()=>{
   const mid=document.getElementById('pg-m').value;
+  const tipoReg = document.getElementById('pg-tipo-reg').value;
   const sel=document.getElementById('pg-pr');
   sel.innerHTML='<option value="">— Sin promesa —</option>';
-  STATE.promesas.filter(p=>p.miembroId===mid&&p.estado!=='Completo').forEach(p=>{
-    const o=document.createElement('option');o.value=p.id;o.textContent=`${fmt(p.monto)} — ${p.estado}`;sel.appendChild(o);
+  const filterTipo = tipoReg === 'insumo' ? 'especie' : 'dinero';
+  STATE.promesas.filter(p=>p.miembroId===mid&&p.estado!=='Completo'&&p.tipo===filterTipo).forEach(p=>{
+    const text = p.tipo === 'especie' ? p.descripcion : `${fmt(p.monto)} — ${p.estado}`;
+    const o=document.createElement('option');o.value=p.id;o.textContent=text;sel.appendChild(o);
   });
 };
 
 window.savePago=async()=>{
   if(!isAdmin){toast('Debes iniciar sesión como administrador','err');return;}
   const mid=document.getElementById('pg-m').value;
-  const mo=parseFloat(document.getElementById('pg-mo').value);
+  const tipoReg = document.getElementById('pg-tipo-reg').value;
   if(!mid){toast('Selecciona un miembro','err');return;}
-  if(!mo||mo<=0){toast('Ingresa un monto válido','err');return;}
   const promesaId=document.getElementById('pg-pr').value||null;
-  await addDoc(collection(db,'pagos'),{miembroId:mid,promesaId,monto:mo,tipo:document.getElementById('pg-ti').value,forma:document.getElementById('pg-fo').value,fecha:document.getElementById('pg-fe').value,obs:document.getElementById('pg-ob').value,boleta:bNum('PAG'),creadoEn:new Date().toISOString()});
-  if(promesaId) await recalcPromesa(promesaId);
-  document.getElementById('pg-mo').value=''; document.getElementById('pg-ob').value='';
-  toast('✓ Pago registrado','ok');
+  
+  if (tipoReg === 'insumo') {
+    const desc = document.getElementById('pg-desc').value.trim();
+    if(!desc){toast('Ingresa una descripción de los insumos','err');return;}
+    await addDoc(collection(db,'pagos'),{miembroId:mid,promesaId,monto:0,tipo:'Entrega de Insumos',forma:'—',fecha:document.getElementById('pg-fe').value,obs:desc,boleta:bNum('INS'),creadoEn:new Date().toISOString()});
+    if(promesaId) await recalcPromesa(promesaId);
+    document.getElementById('pg-desc').value=''; 
+  } else {
+    const mo=parseFloat(document.getElementById('pg-mo').value);
+    if(!mo||mo<=0){toast('Ingresa un monto válido','err');return;}
+    await addDoc(collection(db,'pagos'),{miembroId:mid,promesaId,monto:mo,tipo:document.getElementById('pg-ti').value,forma:document.getElementById('pg-fo').value,fecha:document.getElementById('pg-fe').value,obs:document.getElementById('pg-ob').value,boleta:bNum('PAG'),creadoEn:new Date().toISOString()});
+    if(promesaId) await recalcPromesa(promesaId);
+    document.getElementById('pg-mo').value=''; 
+  }
+  document.getElementById('pg-ob').value='';
+  toast('✓ Registrado','ok');
 };
 
 function renderPagos() {
   const all=STATE.pagos;
-  const tot=sumArr(all,'monto');
+  const tot=sumArr(all.filter(p=>p.tipo!=='Entrega de Insumos'),'monto');
   document.getElementById('kpg-tot').textContent=fmt(tot);
   document.getElementById('kpg-cnt').textContent=all.length;
-  document.getElementById('kpg-avg').textContent=fmt(all.length?tot/all.length:0);
+  document.getElementById('kpg-avg').textContent=fmt(all.filter(p=>p.tipo!=='Entrega de Insumos').length?tot/all.filter(p=>p.tipo!=='Entrega de Insumos').length:0);
   const tbody=document.getElementById('tb-pagos');
   if(!all.length){tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="fas fa-coins"></i><p>Sin pagos</p></div></td></tr>`;return;}
   tbody.innerHTML=[...all].reverse().map(p=>`<tr>
     <td><span class="bol">${p.boleta||''}</span></td>
     <td class="td-name">${getMnombre(p.miembroId)}</td>
-    <td><span class="badge b-cyan">${p.tipo}</span></td>
-    <td style="font-weight:700;color:var(--green)">${fmt(p.monto)}</td>
+    <td><span class="badge b-cyan"><i class="fas ${iconForTipo(p.tipo)}"></i> ${p.tipo}</span></td>
+    <td style="font-weight:700;color:var(--green)">${p.tipo==='Entrega de Insumos'?p.obs:fmt(p.monto)}</td>
     <td style="color:var(--text3)">${p.forma}</td>
     <td style="color:var(--text3)">${p.fecha||'—'}</td>
     <td style="color:var(--text3)">${p.obs||'—'}</td>
@@ -1053,7 +1150,7 @@ function renderGastos() {
   tbody.innerHTML=[...list].reverse().map(g=>`<tr>
     <td><span class="bol">${g.boleta||''}</span></td>
     <td class="td-name">${g.concepto}${g.obs?`<span class="td-sub">${g.obs}</span>`:''}</td>
-    <td><span class="badge b-violet">${g.cat}</span></td>
+    <td><span class="badge b-violet"><i class="fas ${iconForCat(g.cat)}"></i> ${g.cat}</span></td>
     <td style="color:var(--text3)">${g.proveedor||'—'}</td>
     <td style="color:var(--text3)">${g.boletaFisica||'—'}</td>
     <td style="font-weight:700;color:var(--red)">${fmt(g.monto)}</td>
@@ -1065,17 +1162,18 @@ window.delGasto=async id=>{if(!isAdmin||!confirm('¿Eliminar gasto?'))return;awa
 
 /* ══════ CAJA ══════ */
 function renderCaja() {
-  const ing=sumArr(STATE.pagos,'monto'), eg=sumArr(STATE.gastos,'monto'), sal=ing-eg;
+  const ing=sumArr(STATE.pagos.filter(p=>p.tipo!=='Entrega de Insumos'),'monto'), eg=sumArr(STATE.gastos,'monto'), sal=ing-eg;
   document.getElementById('cc-ing').textContent=fmt(ing);
   document.getElementById('cc-eg').textContent=fmt(eg);
   document.getElementById('cc-sal').textContent=fmt(sal);
-  document.getElementById('cc-ing-n').textContent=STATE.pagos.length+' transacciones';
+  document.getElementById('cc-ing-n').textContent=STATE.pagos.filter(p=>p.tipo!=='Entrega de Insumos').length+' transacciones';
   document.getElementById('cc-eg-n').textContent=STATE.gastos.length+' gastos';
   document.getElementById('cc-sal-s').textContent=sal>=0?'✓ Saldo positivo':'⚠ Déficit';
   const fil=document.getElementById('cx-filtro').value;
-  const pgs=STATE.pagos.map(p=>({...p,tipo_mov:'ingreso',desc:'Pago — '+getMnombre(p.miembroId)+' ('+p.tipo+')'}));
+  const pgs=STATE.pagos.filter(p=>p.tipo!=='Entrega de Insumos').map(p=>({...p,tipo_mov:'ingreso',desc:'Pago — '+getMnombre(p.miembroId)+' ('+p.tipo+')'}));
+  const ins=STATE.pagos.filter(p=>p.tipo==='Entrega de Insumos').map(p=>({...p,tipo_mov:'ingreso',desc:'Entrega de Insumos — '+getMnombre(p.miembroId)+' ('+p.obs+')',monto:0}));
   const gts=STATE.gastos.map(g=>({...g,tipo_mov:'egreso',desc:g.concepto+(g.proveedor?' / '+g.proveedor:'')}));
-  let movs=[...pgs,...gts].sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||''));
+  let movs=[...pgs,...ins,...gts].sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||''));
   if(fil) movs=movs.filter(m=>m.tipo_mov===fil);
   let acum=0;
   const tbody=document.getElementById('tb-caja-mov');
@@ -1085,7 +1183,7 @@ function renderCaja() {
     return `<tr>
       <td><span class="bol">${m.boleta||''}</span></td>
       <td class="td-name">${m.desc}${m.obs?`<span class="td-sub">${m.obs}</span>`:''}</td>
-      <td><span class="badge ${m.tipo_mov==='ingreso'?'b-ingreso':'b-egreso'}">${m.tipo_mov==='ingreso'?'Ingreso':'Egreso'}</span></td>
+      <td><span class="badge ${m.tipo_mov==='ingreso'?'b-ingreso':'b-egreso'}"><i class="fas ${m.tipo_mov==='ingreso'?'fa-arrow-up':'fa-arrow-down'}"></i> ${m.tipo_mov==='ingreso'?'Ingreso':'Egreso'}</span></td>
       <td style="font-weight:700;color:${m.tipo_mov==='ingreso'?'var(--green)':'var(--red)'}"> ${m.tipo_mov==='ingreso'?'+':'-'}${fmt(mo)}</td>
       <td style="color:var(--text3)">${m.fecha||'—'}</td>
       <td style="font-weight:700;color:${acum>=0?'var(--blue2)':'var(--red)'}">${fmt(acum)}</td>
@@ -1096,11 +1194,12 @@ function renderCaja() {
 /* ══════ REPORTE ══════ */
 function renderReporte() {
   const rows=STATE.miembros.map(m=>{
-    const prom=STATE.promesas.filter(p=>p.miembroId===m.id).reduce((s,p)=>s+(parseFloat(p.monto)||0),0);
-    const pag=STATE.pagos.filter(p=>p.miembroId===m.id).reduce((s,p)=>s+(parseFloat(p.monto)||0),0);
-    return{...m,prom,pag,pend:Math.max(0,prom-pag)};
-  }).filter(m=>m.prom>0||m.pag>0).sort((a,b)=>b.pag-a.pag);
-  const tProm=rows.reduce((s,m)=>s+m.prom,0),tPag=rows.reduce((s,m)=>s+m.pag,0),tPend=rows.reduce((s,m)=>s+m.pend,0);
+    const prom=STATE.promesas.filter(p=>p.miembroId===m.id&&p.tipo==='dinero').reduce((s,p)=>s+(parseFloat(p.monto)||0),0);
+    const pag=STATE.pagos.filter(p=>p.miembroId===m.id&&p.tipo!=='Entrega de Insumos').reduce((s,p)=>s+(parseFloat(p.monto)||0),0);
+    const insumos=STATE.pagos.filter(p=>p.miembroId===m.id&&p.tipo==='Entrega de Insumos').length;
+    return{...m,prom,pag,pend:Math.max(0,prom-pag),insumos};
+  }).filter(m=>m.prom>0||m.pag>0||m.insumos>0).sort((a,b)=>b.pag-a.pag);
+  const tProm=rows.reduce((s,m)=>s+m.prom,0),tPag=rows.reduce((s,m)=>s+m.pag,0),tPend=rows.reduce((s,m)=>s+m.pend,0),tIns=rows.reduce((s,m)=>s+m.insumos,0);
   document.getElementById('tb-reporte').innerHTML=rows.map((m,i)=>{
     const pct=m.prom>0?Math.min(100,(m.pag/m.prom)*100):(m.pag>0?100:0);
     let est='Pendiente'; if(pct>=100)est='Completo'; else if(pct>0)est='Parcial';
@@ -1110,14 +1209,16 @@ function renderReporte() {
       <td style="color:var(--blue2);font-weight:600">${fmt(m.prom)}</td>
       <td style="color:var(--green);font-weight:600">${fmt(m.pag)}</td>
       <td style="color:${m.pend>0?'var(--red)':'var(--green)'};font-weight:600">${fmt(m.pend)}</td>
+      <td style="color:var(--amber);font-weight:600">${m.insumos}</td>
       <td><div style="display:flex;align-items:center;gap:8px"><div class="mini-pb-bg" style="flex:1"><div class="mini-pb-fill" style="width:${pct}%"></div></div><span style="font-size:12px;font-weight:700;color:var(--text);min-width:36px">${pct.toFixed(0)}%</span></div></td>
       <td>${statusBadge(est)}</td></tr>`;
-  }).join('')||`<tr><td colspan="7"><div class="empty"><i class="fas fa-chart-pie"></i><p>Sin datos</p></div></td></tr>`;
+  }).join('')||`<tr><td colspan="8"><div class="empty"><i class="fas fa-chart-pie"></i><p>Sin datos</p></div></td></tr>`;
   document.getElementById('tf-reporte').innerHTML=rows.length?`<tr>
     <td colspan="2" style="font-family:var(--ff-head);color:var(--blue1)">TOTALES (${rows.length} miembros)</td>
     <td style="color:var(--blue2);font-weight:700">${fmt(tProm)}</td>
     <td style="color:var(--green);font-weight:700">${fmt(tPag)}</td>
     <td style="color:var(--red);font-weight:700">${fmt(tPend)}</td>
+    <td style="color:var(--amber);font-weight:700">${tIns}</td>
     <td colspan="2"></td></tr>`:'';
 }
 
@@ -1147,5 +1248,6 @@ try {
 }
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
