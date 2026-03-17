@@ -770,6 +770,18 @@ function iconForCat(c) {
   return map[c] || 'fa-tag';
 }
 
+function iconForTipo(t) {
+  const map = {'Pago':'fa-hand-holding-dollar','Adelanto':'fa-clock','Ofrenda':'fa-hands-praying','Donación Especial':'fa-gift','Entrega de Insumos':'fa-box'};
+  return map[t] || 'fa-circle-dollar-to-slot';
+}
+
+function statusBadge(estado) {
+  const map = {'Pendiente':'b-pending','Parcial':'b-partial','Completo':'b-complete'};
+  const clase = map[estado] || 'b-cyan';
+  const icon = estado === 'Pendiente' ? 'fa-clock' : estado === 'Parcial' ? 'fa-circle-half-stroke' : 'fa-circle-check';
+  return `<span class="badge ${clase}"><i class="fas ${icon}"></i> ${estado}</span>`;
+}
+
 /* ══════ TOAST ══════ */
 function toast(msg,type='ok') {
   const t=document.getElementById('toast'),im=t.querySelector('i'),tm=document.getElementById('toast-msg');
@@ -1040,27 +1052,56 @@ function renderPromesas() {
   document.getElementById('kp-tot').textContent=fmt(sumArr(all.filter(p=>p.tipo!=='especie'),'monto'));
   document.getElementById('kp-com').textContent=all.filter(p=>p.estado==='Completo').length;
   document.getElementById('kp-pen').textContent=all.filter(p=>p.estado!=='Completo').length;
-  const list=fil?all.filter(p=>p.estado===fil):all;
+  
+  // Crear lista de todos los miembros con sus promesas
   const tbody=document.getElementById('tb-promesas');
-  if(!list.length){tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="fas fa-handshake"></i><p>Sin promesas</p></div></td></tr>`;return;}
-  tbody.innerHTML=[...list].reverse().map(p=>{
-    const tipo = p.tipo || 'dinero';
-    const prometido = tipo === 'especie' ? p.descripcion : fmt(p.monto);
-    const pagado=parseFloat(p.pagado||0),pend=tipo==='especie'? (p.estado==='Completo'?'Completado':'Pendiente') : fmt(Math.max(0,parseFloat(p.monto)-pagado));
-    return `<tr>
-      <td class="td-name">${getMnombre(p.miembroId)}</td>
-      <td style="font-weight:700;color:var(--blue2)">${prometido}</td>
-      <td style="color:var(--green);font-weight:600">${tipo==='especie'?'—':fmt(pagado)}</td>
-      <td style="color:${tipo==='especie'?(p.estado==='Completo'?'var(--green)':'var(--red)'):(pend>0?'var(--red)':'var(--green)')};font-weight:600">${pend}</td>
-      <td style="color:var(--text3)">${p.fecha||'—'}</td>
-      <td>${statusBadge(p.estado)}</td>
-      <td style="color:var(--text3)">${p.obs||'—'}</td>
-      <td class="admin-only" style="display:flex;gap:6px">
-        ${tipo==='dinero'?'<button class="btn-sm btn-edit" onclick="irAPagoPromesa(\''+p.id+'\',\''+p.miembroId+'\')"><i class="fas fa-plus"></i> Pago</button>':''}
-        <button class="btn-sm btn-del"  onclick="delPromesa('${p.id}')"><i class="fas fa-trash"></i></button>
-      </td>
-    </tr>`;
-  }).join('');
+  const miembrosConPromesas = STATE.miembros.map(m => ({
+    miembro: m,
+    promesas: STATE.promesas.filter(p => p.miembroId === m.id)
+  })).filter(x => x.promesas.length > 0 || true); // Mostrar todos los miembros
+  
+  if(!miembrosConPromesas.length){tbody.innerHTML=`<tr><td colspan="8"><div class="empty"><i class="fas fa-handshake"></i><p>Sin miembros registrados</p></div></td></tr>`;return;}
+  
+  let html = '';
+  miembrosConPromesas.forEach(item => {
+    const { miembro, promesas } = item;
+    const promesasDelMiembro = fil ? promesas.filter(p=>p.estado===fil) : promesas;
+    
+    if(promesasDelMiembro.length > 0) {
+      promesasDelMiembro.forEach(p => {
+        const tipo = p.tipo || 'dinero';
+        const prometido = tipo === 'especie' ? p.descripcion : fmt(p.monto);
+        const pagado=parseFloat(p.pagado||0),pend=tipo==='especie'? (p.estado==='Completo'?'Completado':'Pendiente') : fmt(Math.max(0,parseFloat(p.monto)-pagado));
+        html += `<tr>
+          <td class="td-name">${miembro.nombre}</td>
+          <td style="font-weight:700;color:var(--blue2)">${prometido}</td>
+          <td style="color:var(--green);font-weight:600">${tipo==='especie'?'—':fmt(pagado)}</td>
+          <td style="color:${tipo==='especie'?(p.estado==='Completo'?'var(--green)':'var(--red)'):(pend>0?'var(--red)':'var(--green)')};font-weight:600">${pend}</td>
+          <td style="color:var(--text3)">${p.fecha||'—'}</td>
+          <td>${statusBadge(p.estado)}</td>
+          <td style="color:var(--text3)">${p.obs||'—'}</td>
+          <td class="admin-only" style="display:flex;gap:6px">
+            ${tipo==='dinero'?'<button class="btn-sm btn-edit" onclick="irAPagoPromesa(\''+p.id+'\',\''+p.miembroId+'\')"><i class="fas fa-plus"></i> Pago</button>':''}
+            <button class="btn-sm btn-del"  onclick="delPromesa('${p.id}')"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>`;
+      });
+    } else if(!fil) {
+      // Si no hay filtro, mostrar el miembro sin promesas
+      html += `<tr>
+        <td class="td-name">${miembro.nombre}</td>
+        <td style="color:var(--text3);font-style:italic">—</td>
+        <td style="color:var(--text3)">—</td>
+        <td style="color:var(--text3)">—</td>
+        <td style="color:var(--text3)">—</td>
+        <td><span class="badge b-pending"><i class="fas fa-clock"></i> Sin Promesa</span></td>
+        <td style="color:var(--text3)">—</td>
+        <td class="admin-only"></td>
+      </tr>`;
+    }
+  });
+  
+  tbody.innerHTML = html || `<tr><td colspan="8"><div class="empty"><i class="fas fa-handshake"></i><p>Sin promesas con filtro seleccionado</p></div></td></tr>`;
 }
 window.irAPagoPromesa=(pid,mid)=>{nav('pagos');setTimeout(()=>{document.getElementById('pg-m').value=mid;loadPgPromesas();setTimeout(()=>{document.getElementById('pg-pr').value=pid;},80);},80);};
 window.delPromesa=async id=>{if(!isAdmin||!confirm('¿Eliminar promesa?'))return;await deleteDoc(doc(db,'promesas',id));toast('Promesa eliminada','info');};
